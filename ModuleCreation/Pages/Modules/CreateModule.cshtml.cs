@@ -76,8 +76,8 @@ namespace ModuleCreation.Pages.Modules
             Console.WriteLine("Status : " + ModuleObject.ModuleOfferStatus);
 
 
-
-            string DbConnection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\ZAIRU\SOURCE\REPOS\MODULECREATION\MODULECREATION\DATA\CREATEMODULE.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            DBConnection db = new DBConnection();
+            string DbConnection = db.DbString();
             SqlConnection conn = new SqlConnection(DbConnection);
             conn.Open();
 

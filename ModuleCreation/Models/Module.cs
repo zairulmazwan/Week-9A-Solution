@@ -22,7 +22,7 @@ namespace ModuleCreation.Models
 
         [Required]
         [Display(Name = "Module Year")]
-        public List<bool> ModuleYear { get; set; } = new List<bool> { false, false, false, false }; //We will have year 1,2,3,4 : using checkboxes - True of flase
+        public List<bool> ModuleYear { get; set; } //We will have year 1,2,3,4 : using checkboxes - True of flase
         [Required]
         [Display(Name = "Module Course")]
         public List<string> ModuleCourse { get; set; }

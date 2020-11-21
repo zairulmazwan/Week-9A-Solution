@@ -54,6 +54,7 @@
                     <td>@Model.Records[i].Year</td>
                     <td>@Model.Records[i].Course</td>
                     <td>@Model.Records[i].ModuleOfferStatus</td>
+                    <td><a asp-page="/Modules/UpdateModule" asp-route-id="@Model.Records[i].Id" >Update</a></td>
                 </tr>
             }
 

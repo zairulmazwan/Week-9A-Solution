@@ -29,6 +29,10 @@
             <div class="form-group">
                 <label asp-for="ModuleObject.ModuleYear" class="control-label font-weight-bold">Module Year : </label>
                 <br />
+
+                <div>
+                    <input type="checkbox" onClick="toggle(this)" /> Select All<br />
+                </div>
                 @for (int i = 0; i < Model.Year.Count; i++)
                 {
                     //Console.WriteLine("here : "+i);

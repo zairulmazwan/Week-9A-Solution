@@ -24,7 +24,8 @@ namespace ModuleCreation.Pages.Modules
 
         public IActionResult OnGet()
         {
-            string DbConnection = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=C:\USERS\ZAIRU\SOURCE\REPOS\MODULECREATION\MODULECREATION\DATA\CREATEMODULE.MDF;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            DBConnection db = new DBConnection();
+            string DbConnection = db.DbString();
             SqlConnection conn = new SqlConnection(DbConnection);
             conn.Open();
 
@@ -47,6 +48,7 @@ namespace ModuleCreation.Pages.Modules
                 while (reader.Read())
                 {
                     Module rec = new Module() ;
+                    rec.Id = reader.GetInt32(0);
                     rec.ModuleCode = reader.GetString(1);
                     rec.ModuleName = reader.GetString(2);
                     rec.ModuleLevel = reader.GetInt32(3);
