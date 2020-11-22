@@ -28,10 +28,10 @@ namespace ModuleCreation.Pages.Modules
 
         public string[] StatusOfModule = new string[2] { "Active", "Not-Active" };
 
-        public IActionResult OnGet(int? Id) 
+        public IActionResult OnGet(int? Id) //int? int Id = the Id from the table for the record
         {
             Mod = new Module();
-            Mod.ModuleYear = new List<bool>{ false, false, false, false};
+            Mod.ModuleYear = new List<bool>{ false, false, false, false}; //we set the checkboxes as false first
 
             DBConnection db = new DBConnection();
             string DbConnection = db.DbString();
@@ -59,43 +59,31 @@ namespace ModuleCreation.Pages.Modules
             }
 
             //Getting Year from string to array format
-            string[] year = Mod.Year.Split(",");
+            string[] year = Mod.Year.Split(","); //this variable is string from database. Split the string into an array
 
             //Getting Course from string to array format
-            string[] course = Mod.Course.Split(",");
+            string[] course = Mod.Course.Split(","); //this variable is string from database. Split the string into an array
             Console.WriteLine("Len " + year.Length);
 
-        
+            //each year item indicates the index of the checkbox
             for (int i=0; i<year.Length-1; i++)//ignore the last element = 1,2,3,
             {
                 int index = Int32.Parse(year[i]); //getting the year which represent the position of checkbox
                 Console.WriteLine(index);
-                Mod.ModuleYear.Insert(index, true);
+                Mod.ModuleYear.Insert((index-1), true); //set the checkbox list as true for the index (module year)
             }
 
-           
+            //reading the course from the list
             for (int i=0; i<Course.Count(); i++)
             {
-                for (int j = 0; j < course.Length; j++)
+                for (int j = 0; j < course.Length; j++) //reading the course from the table
                 {
-                    if (course[j] == Course[i].Value)
+                    if (course[j] == Course[i].Value)//if the same course found from the table
                     {
-                        Course[i].Selected = true;
+                        Course[i].Selected = true; //set the item as true (selected) if the item is found from Db
                     }
                 }
             }
-           
-
-            /*
-            foreach (var item in selectList.Items)
-            {
-                if (item.Value == selectedValue)
-                {
-                    item.Selected = true;
-                    break;
-                }
-            }*/
-
 
             return Page();
         }
