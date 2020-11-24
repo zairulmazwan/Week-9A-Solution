@@ -1,0 +1,58 @@
+﻿@page
+@model ModuleCreation.Pages.Modules.DeleteModel
+@{
+}
+
+
+<h1>:: Delete Module Page ::</h1>
+
+<div class="row">
+    <div class="col-10">
+        <form method="post">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Mod[0].ModuleCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Mod[0].ModuleName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Mod[0].ModuleLevel)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Mod[0].Year)
+                        </th>
+                        <th>
+                            Select Module to Delete
+                        </th>
+                    </tr>
+                </thead>
+
+                @for (int i = 0; i < Model.Mod.Count(); i++)
+                {
+                    <tr>
+                        <input type="hidden" asp-for=@Model.Mod[i].Id />
+                        <td><input type="hidden" asp-for=@Model.Mod[i].ModuleCode />@Model.Mod[i].ModuleCode</td>
+                        <td><input type="hidden" asp-for=@Model.Mod[i].ModuleName />@Model.Mod[i].ModuleName</td>
+                        <td><input type="hidden" asp-for=@Model.Mod[i].ModuleLevel />@Model.Mod[i].ModuleLevel</td>
+                        <td><input type="hidden" asp-for=@Model.Mod[i].ModuleYear />@Model.Mod[i].Year</td>
+                        <td>@Html.CheckBoxFor(model => model.IsSelect[i], new { @class = "form-control" })</td>
+                    </tr>
+                }
+
+            </table>
+
+            <div>
+                <input type="submit" value="Delete" />
+            </div>
+
+        </form>
+    </div>
+
+
+
+
+</div>
