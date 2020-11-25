@@ -3,7 +3,7 @@
 
 // Write your Javascript code.
 function toggle(source) {
-    var checkBoxes = document.querySelectorAll("input[name^='ModuleObject.ModuleYear[']");
+    var checkBoxes = document.querySelectorAll("input[name^='Mod.ModuleYear[']");
 
     for (var i = 0; i < checkBoxes.length; i++) {
         if (checkBoxes[i].type == "checkbox")

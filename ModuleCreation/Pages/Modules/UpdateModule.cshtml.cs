@@ -48,6 +48,7 @@ namespace ModuleCreation.Pages.Modules
 
                 while (reader.Read())
                 {
+                    Mod.Id = reader.GetInt32(0);
                     Mod.ModuleCode = reader.GetString(1);
                     Mod.ModuleName = reader.GetString(2);
                     Mod.ModuleLevel = reader.GetInt32(3);
@@ -86,6 +87,67 @@ namespace ModuleCreation.Pages.Modules
             }
 
             return Page();
+        }
+
+
+
+
+        public IActionResult OnPost()
+        {
+            string StringYear = "";
+            for (int i = 0; i < Mod.ModuleYear.Count; i++)
+            {
+                if (Mod.ModuleYear[i] == true)
+                {
+                    StringYear += Year[i] + ",";
+                }
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                Mod.ModuleCourse.Clear();
+                return Page();
+            }
+
+            string Course = "";
+            foreach (var course in Mod.ModuleCourse)
+            {
+                Course += course + ",";
+            }
+
+            Console.WriteLine("::OnPost::");
+            Console.WriteLine("Id : " + Mod.Id);
+            Console.WriteLine("Code : " + Mod.ModuleCode);
+            Console.WriteLine("Name : " + Mod.ModuleName);
+            Console.WriteLine("Level : " + Mod.ModuleLevel);
+            Console.WriteLine("Year : " + StringYear);
+            Console.WriteLine("Course : " + Course);
+            Console.WriteLine("Status : " + Mod.ModuleOfferStatus);
+
+
+            DBConnection db = new DBConnection();
+            string DbConnection = db.DbString();
+            SqlConnection conn = new SqlConnection(DbConnection);
+            conn.Open();
+
+            using (SqlCommand command = new SqlCommand())
+            {
+                command.Connection = conn;
+                command.CommandText = @"UPDATE Module SET ModuleCode=@ModCode, ModuleName=@ModName, ModuleLevel=@ModLevel, ModuleYear=@ModYear, ModuleCourse=@ModCourse, ModuleOfferStatus=@ModStat WHERE Id = @Id";
+
+                command.Parameters.AddWithValue("@Id", Mod.Id);
+                command.Parameters.AddWithValue("@ModCode", Mod.ModuleCode);
+                command.Parameters.AddWithValue("@ModName", Mod.ModuleName);
+                command.Parameters.AddWithValue("@ModLevel", Mod.ModuleLevel);
+                command.Parameters.AddWithValue("@ModYear", StringYear);
+                command.Parameters.AddWithValue("@ModCourse", Course);
+                command.Parameters.AddWithValue("@ModStat", Mod.ModuleOfferStatus);
+
+                command.ExecuteNonQuery();
+            }
+
+            return RedirectToPage("/Index");
         }
     }
 }

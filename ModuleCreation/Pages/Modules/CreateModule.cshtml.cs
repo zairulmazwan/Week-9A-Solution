@@ -14,7 +14,7 @@ namespace ModuleCreation.Pages.Modules
     public class CreateModuleModel : PageModel
     {
         [BindProperty]
-        public Module ModuleObject { get; set; }
+        public Module Mod { get; set; }
 
         public List<int> Level = new List<int> { 4, 5, 6, 7 }; //initialise the list 
         public List<string> Year = new List<string>{ "1", "2", "3", "4" }; //initialise the array - uses checkbox
@@ -47,9 +47,9 @@ namespace ModuleCreation.Pages.Modules
         public IActionResult OnPost()
         {
             string StringYear = "";
-            for (int i = 0; i < ModuleObject.ModuleYear.Count; i++)
+            for (int i = 0; i < Mod.ModuleYear.Count; i++)
             {
-                if (ModuleObject.ModuleYear[i] == true)
+                if (Mod.ModuleYear[i] == true)
                 {
                     StringYear += Year[i] + ",";
                 }
@@ -58,22 +58,22 @@ namespace ModuleCreation.Pages.Modules
 
             if (!ModelState.IsValid)
             {
-                ModuleObject.ModuleCourse.Clear();
+                Mod.ModuleCourse.Clear();
                 return Page();
             } 
 
             string Course = "";
-            foreach (var course in ModuleObject.ModuleCourse)
+            foreach (var course in Mod.ModuleCourse)
             {
                 Course += course + ",";
             }
 
-            Console.WriteLine("Code : " + ModuleObject.ModuleCode);
-            Console.WriteLine("Name : " + ModuleObject.ModuleName);
-            Console.WriteLine("Level : " + ModuleObject.ModuleLevel);
+            Console.WriteLine("Code : " + Mod.ModuleCode);
+            Console.WriteLine("Name : " + Mod.ModuleName);
+            Console.WriteLine("Level : " + Mod.ModuleLevel);
             Console.WriteLine("Year : " + StringYear);
             Console.WriteLine("Course : " + Course);
-            Console.WriteLine("Status : " + ModuleObject.ModuleOfferStatus);
+            Console.WriteLine("Status : " + Mod.ModuleOfferStatus);
 
 
             DBConnection db = new DBConnection();
@@ -86,12 +86,12 @@ namespace ModuleCreation.Pages.Modules
                 command.Connection = conn;
                 command.CommandText = @"INSERT INTO Module (ModuleCode, ModuleName, ModuleLevel, ModuleYear, ModuleCourse, ModuleOfferStatus) VALUES (@ModCode, @ModName, @ModLevel, @ModYear, @ModCourse, @ModStat)";
 
-                command.Parameters.AddWithValue("@ModCode",ModuleObject.ModuleCode);
-                command.Parameters.AddWithValue("@ModName", ModuleObject.ModuleName);
-                command.Parameters.AddWithValue("@ModLevel", ModuleObject.ModuleLevel);
+                command.Parameters.AddWithValue("@ModCode", Mod.ModuleCode);
+                command.Parameters.AddWithValue("@ModName", Mod.ModuleName);
+                command.Parameters.AddWithValue("@ModLevel", Mod.ModuleLevel);
                 command.Parameters.AddWithValue("@ModYear", StringYear);
                 command.Parameters.AddWithValue("@ModCourse", Course);
-                command.Parameters.AddWithValue("@ModStat", ModuleObject.ModuleOfferStatus);
+                command.Parameters.AddWithValue("@ModStat", Mod.ModuleOfferStatus);
 
                 command.ExecuteNonQuery();
             }

@@ -9,25 +9,25 @@
 
         <form method="post">
             <div class="form-group">
-                <label asp-for="ModuleObject.ModuleCode" class="control-label font-weight-bold">Module Code : </label>
-                <input asp-for="ModuleObject.ModuleCode" class="form-control" />
-                <span asp-validation-for="ModuleObject.ModuleCode" class="text-danger"></span>
+                <label asp-for="Mod.ModuleCode" class="control-label font-weight-bold">Module Code : </label>
+                <input asp-for="Mod.ModuleCode" class="form-control" />
+                <span asp-validation-for="Mod.ModuleCode" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ModuleObject.ModuleName" class="control-label font-weight-bold">Module Name : </label>
-                <input asp-for="ModuleObject.ModuleName" class="form-control" />
-                <span asp-validation-for="ModuleObject.ModuleName" class="text-danger"></span>
+                <label asp-for="Mod.ModuleName" class="control-label font-weight-bold">Module Name : </label>
+                <input asp-for="Mod.ModuleName" class="form-control" />
+                <span asp-validation-for="Mod.ModuleName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ModuleObject.ModuleLevel" class="control-label font-weight-bold">Module Level : </label>
-                @Html.DropDownListFor(x => Model.ModuleObject.ModuleLevel, new SelectList(Model.Level), "Select Level", htmlAttributes: new { @class = "form-control", id = "level" })
-                <span asp-validation-for="ModuleObject.ModuleLevel" class="text-danger"></span>
+                <label asp-for="Mod.ModuleLevel" class="control-label font-weight-bold">Module Level : </label>
+                @Html.DropDownListFor(x => Model.Mod.ModuleLevel, new SelectList(Model.Level), "Select Level", htmlAttributes: new { @class = "form-control", id = "level" })
+                <span asp-validation-for="Mod.ModuleLevel" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ModuleObject.ModuleYear" class="control-label font-weight-bold">Module Year : </label>
+                <label asp-for="Mod.ModuleYear" class="control-label font-weight-bold">Module Year : </label>
                 <br />
 
                 <div>
@@ -36,34 +36,34 @@
                 @for (int i = 0; i < Model.Year.Count; i++)
                 {
                     //Console.WriteLine("here : "+i);
-                    @Html.CheckBoxFor(m => m.ModuleObject.ModuleYear[i], new { @class = "form-check-inline" })@Model.Year[i]
+                    @Html.CheckBoxFor(m => m.Mod.ModuleYear[i], new { @class = "form-check-inline" })@Model.Year[i]
                     <br />
 
                 }
-                <span asp-validation-for="ModuleObject.ModuleYear" class="text-danger"></span>
+                <span asp-validation-for="Mod.ModuleYear" class="text-danger"></span>
             </div>
 
 
 
             <div class="form-group">
-                <label asp-for="ModuleObject.ModuleCourse" class="control-label font-weight-bold">Module Course :</label><br />
-                <select asp-for="ModuleObject.ModuleCourse" type="text" asp-items="Model.Course" multiple style="width: 250px;">
+                <label asp-for="Mod.ModuleCourse" class="control-label font-weight-bold">Module Course :</label><br />
+                <select asp-for="Mod.ModuleCourse" type="text" asp-items="Model.Course" multiple style="width: 250px;">
                 </select>
 
                 <br />
-                <span asp-validation-for="ModuleObject.ModuleCourse" class="text-danger"></span>
+                <span asp-validation-for="Mod.ModuleCourse" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="ModuleObject.ModuleOfferStatus" class="control-label font-weight-bold">Module Offer Status</label><br />
+                <label asp-for="Mod.ModuleOfferStatus" class="control-label font-weight-bold">Module Offer Status</label><br />
 
                 @for (int i = 0; i < Model.StatusOfModule.Length; i++)
                 {
                     <div style="padding-left: 15px;">
-                        @Html.RadioButtonFor(model => model.ModuleObject.ModuleOfferStatus, Model.StatusOfModule[i]) @Model.StatusOfModule[i]
+                        @Html.RadioButtonFor(model => model.Mod.ModuleOfferStatus, Model.StatusOfModule[i]) @Model.StatusOfModule[i]
                     </div>
                 }
-                <span asp-validation-for="ModuleObject.ModuleOfferStatus" class="text-danger"></span>
+                <span asp-validation-for="Mod.ModuleOfferStatus" class="text-danger"></span>
             </div>
 
             <div>
@@ -75,3 +75,5 @@
     
 
 </div>
+
+
